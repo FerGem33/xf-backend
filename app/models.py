@@ -1,3 +1,4 @@
+from datetime import datetime, UTC
 from flask_sqlalchemy import SQLAlchemy
 from .db import db
 
@@ -22,7 +23,7 @@ class Entry(db.Model):
     entry_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default=lambda: datetime.now(UTC))
     category_id = db.Column(db.Integer, db.ForeignKey("categories.category_id"), nullable=False)
 
     category = db.relationship("Category", back_populates="entries")

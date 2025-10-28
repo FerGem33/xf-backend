@@ -9,9 +9,9 @@ from .routes.ideas import ideas_bp
 from .routes.images import images_bp 
 from .routes.links import links_bp
 
-def create_app():
+def create_app(config_class = None):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class or Config)
     CORS(app)
 
     # Initialize DB
