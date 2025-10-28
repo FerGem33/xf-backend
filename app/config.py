@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
+    PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME")
@@ -12,6 +13,7 @@ class Config:
 
 class TestConfig:
     TESTING = True
+    PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CLOUDINARY_CLOUD_NAME = None

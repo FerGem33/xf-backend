@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+
 from flask_cors import CORS
 from .config import Config
 from .db import db
@@ -26,5 +27,18 @@ def create_app(config_class = None):
     app.register_blueprint(ideas_bp, url_prefix="/api")
     app.register_blueprint(images_bp, url_prefix="/api")
     app.register_blueprint(links_bp, url_prefix="/api")
+
+    @app.before_request
+    def require_api_key():
+        # Skip auth for test or debug environments
+        if app.debug or app.config.get("TESTING"):
+            return
+
+        # Apply only to API routes
+        if request.path.startswith("/api"):
+            key = request.headers.get("Authorization", "")
+            expected = f"Bearer {app.config['PRIVATE_API_KEY']}"
+            if key != expected:
+                return jsonify({"error": "Unauthorized"}), 401
 
     return app

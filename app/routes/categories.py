@@ -1,3 +1,4 @@
+from ..utils.auth import require_api_key
 from flask import Blueprint, jsonify, request
 from ..models import Category
 from ..db import db
