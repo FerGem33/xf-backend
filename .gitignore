@@ -1,0 +1,21 @@
+venv/
+**/venv/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+
+# Environment variables
+.env
+**/.env
+
+# Tests
+test_output.txt
+
+# ----------------------------
+# OS / IDE
+# ----------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
